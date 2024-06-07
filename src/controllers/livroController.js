@@ -4,8 +4,8 @@ class LivroController {
 
   static getAllLivros = async(req, res) => {
     try {
-      const users = await Livro.findAll();
-      res.status(200).json(users);
+      const livros = await Livro.findAll();
+      res.status(200).json(livros);
     } catch (error) {
       res.status(500).json({error: error.message});
     }
@@ -18,6 +18,7 @@ class LivroController {
       if(livro) return res.status(200).json(livro);
       res.status(400).json({message: 'Livro não encontrado'});
     } catch (error) {
+      console.error('erro')
       res.status(500).json({error: error.message});
     }
   }
@@ -38,8 +39,8 @@ class LivroController {
     const id = req.params.id;
     const body = req.body;
     try {
-      const livro = await Livro.update(body, { where: { id }});
-      res.status(200).json(livro);
+      await Livro.update(body, { where: { id }});
+      res.status(200).json();
     } catch (error) {
       res.status(500).json({error: error.message});
     }
@@ -56,7 +57,6 @@ class LivroController {
       res.status(500).json({error: error.message});  
     }
   }
-
 }
 
 export default LivroController;

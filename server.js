@@ -7,7 +7,7 @@ const port = 3000;
 const tryConnection = async () => {
   try {
     await dbConnection.authenticate();
-    await dbConnection.sync();
+    await dbConnection.sync({alter: true});
     console.log('db sincronizado');
   } catch (error) { 
     console.error(`Erro ao se conectar com db ${error}`)
